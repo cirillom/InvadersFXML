@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.usp.elements.Sprite;
+
 /**
  * JavaFX App
  */
@@ -165,54 +167,6 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    private static class Sprite extends ImageView {
-        boolean dead = false;
-        final String type;
-
-        Sprite(int x, int y, int w, int h, String type, String file) {
-            InputStream is = null;
-            try {
-                is = App.class.getResource("images/"+ file).openStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Image image = new Image(is, w, h, false, false);
-            setImage(image);
-
-            this.type = type;
-            setTranslateX(x);
-            setTranslateY(y);
-        }
-
-        void moveLeft() {
-            double next_pos = getTranslateX() - 5;
-            if(next_pos >= 0){
-                setTranslateX(next_pos);
-            }
-        }
-
-        void moveRight() {
-            double next_pos = getTranslateX() + 5;
-            if(next_pos <= (560 - getImage().getWidth())){
-                setTranslateX(next_pos);
-            }
-        }
-
-        void moveUp() {
-            double next_pos = getTranslateY() - 5;
-            if(next_pos >= 0){
-                setTranslateY(next_pos);
-            }
-        }
-
-        void moveDown() {
-            double next_pos = getTranslateY() + 5;
-            if(next_pos <= (640 - getImage().getWidth())){
-                setTranslateY(next_pos);
-            }
-        }
     }
 
     public static void main(String[] args) {
