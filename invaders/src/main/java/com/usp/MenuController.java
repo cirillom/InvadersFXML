@@ -7,6 +7,6 @@ import javafx.fxml.FXML;
 public class MenuController {
     @FXML
     void startGame(ActionEvent event) throws IOException {
-        App.setRoot("game"); 
+        //App.setRoot("game"); 
     }
 }

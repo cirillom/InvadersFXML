@@ -7,6 +7,6 @@ import javafx.fxml.FXML;
 public class GameController {
     @FXML
     void pauseGame(ActionEvent event)  throws IOException {
-        App.setRoot("menu");
+        //App.setRoot("menu");
     }
 }
