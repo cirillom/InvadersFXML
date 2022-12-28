@@ -195,17 +195,23 @@ public class App extends Application {
 
         void moveRight() {
             double next_pos = getTranslateX() + 5;
-            if(next_pos <= (527)){
+            if(next_pos <= (560 - getImage().getWidth())){
                 setTranslateX(next_pos);
             }
         }
 
         void moveUp() {
-            setTranslateY(getTranslateY() - 5);
+            double next_pos = getTranslateY() - 5;
+            if(next_pos >= 0){
+                setTranslateY(next_pos);
+            }
         }
 
         void moveDown() {
-            setTranslateY(getTranslateY() + 5);
+            double next_pos = getTranslateY() + 5;
+            if(next_pos <= (640 - getImage().getWidth())){
+                setTranslateY(next_pos);
+            }
         }
     }
 
