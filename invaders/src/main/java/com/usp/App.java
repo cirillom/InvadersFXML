@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.usp.elements.Bullet;
 import com.usp.elements.Sprite;
 
 /**
@@ -142,9 +143,10 @@ public class App extends Application {
     }
 
     private void shoot(Sprite who) {
-        Sprite s = new Sprite((int) who.getTranslateX() + 20, (int) who.getTranslateY(), 5, 20, who.type + "bullet", "bullet.png");
+        //Sprite s = new Sprite((int) who.getTranslateX() + 20, (int) who.getTranslateY(), 5, 20, who.type + "bullet", "bullet.png");
+        Bullet b = new Bullet((int) who.getTranslateX() + 20, (int) who.getTranslateY(), who.type);
 
-        root.getChildren().add(s);
+        root.getChildren().add(b);
     }
 
     @Override
@@ -160,7 +162,9 @@ public class App extends Application {
                     player.moveRight();
                     break;
                 case SPACE:
-                    shoot(player);
+                    if(sprites().stream().filter(s -> s.type.equals("playerbullet")).count() < 3){
+                        shoot(player);
+                    }
                     break;
             }
         });
