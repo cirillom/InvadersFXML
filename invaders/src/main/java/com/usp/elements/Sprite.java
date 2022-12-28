@@ -50,7 +50,7 @@ public class Sprite extends ImageView {
 
     public void moveDown() {
         double next_pos = getTranslateY() + 5;
-        if(next_pos <= (640 - getImage().getWidth())){
+        if(next_pos <= (640 - getImage().getHeight())){
             setTranslateY(next_pos);
         }
     }
