@@ -51,31 +51,7 @@ public class Sprite extends ImageView {
         setTranslateY(yPos);
     }
 
-    public void moveLeft() {
-        double next_pos = getTranslateX() - 5;
-        if(next_pos >= 0){
-            setTranslateX(next_pos);
-        }
-    }
-
-    public void moveRight() {
-        double next_pos = getTranslateX() + 5;
-        if(next_pos <= (560 - getImage().getWidth())){
-            setTranslateX(next_pos);
-        }
-    }
-
-    public void moveUp() {
-        double next_pos = getTranslateY() - 5;
-        if(next_pos >= 0){
-            setTranslateY(next_pos);
-        }
-    }
-
-    public void moveDown() {
-        double next_pos = getTranslateY() + 5;
-        if(next_pos <= (640 - getImage().getHeight())){
-            setTranslateY(next_pos);
-        }
+    public void damage(){
+        life--;
     }
 }

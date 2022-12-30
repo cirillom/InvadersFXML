@@ -29,11 +29,11 @@ public class LevelDesigner {
         final int initialy = 100;
         final int spacing = 40;
         for (int i = 0; i < 11; i++) {
-            Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 10);
-            Enemy b = new Enemy(initialx + i*spacing, initialy + 1 * spacing, 28, 20, "medium_invader.gif", 5);
-            Enemy c = new Enemy(initialx + i*spacing, initialy + 2 * spacing, 28, 20, "medium_invader.gif", 5);
-            Enemy d = new Enemy(initialx + i*spacing, initialy + 3 * spacing, 30, 20, "large_invader.gif", 3);
-            Enemy e = new Enemy(initialx + i*spacing, initialy + 4 * spacing, 30, 20, "large_invader.gif", 3);
+            Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 40);
+            Enemy b = new Enemy(initialx + i*spacing, initialy + 1 * spacing, 28, 20, "medium_invader.gif", 20);
+            Enemy c = new Enemy(initialx + i*spacing, initialy + 2 * spacing, 28, 20, "medium_invader.gif", 20);
+            Enemy d = new Enemy(initialx + i*spacing, initialy + 3 * spacing, 30, 20, "large_invader.gif", 10);
+            Enemy e = new Enemy(initialx + i*spacing, initialy + 4 * spacing, 30, 20, "large_invader.gif", 10);
 
             root.getChildren().add(a);
             root.getChildren().add(b);

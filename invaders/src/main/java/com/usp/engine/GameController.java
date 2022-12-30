@@ -1,8 +1,10 @@
 package com.usp.engine;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.usp.App;
 import com.usp.elements.Barrier;
 import com.usp.elements.Enemy;
 import com.usp.elements.Player;
@@ -50,11 +52,14 @@ public class GameController{
 
     private void update() {
         if(player.life == 0){
-            System.out.println("GAME OVER");
-            //App.setRoot("endgame");
-            //TODO load last scene
+            try {
+                App.setRoot("endscreen");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             return;
         }
+
         t += 0.016;
         points.setText(gameEngine.points_value + "pts");
         high_score.setText(GameEngine.high_score_value + "pts");

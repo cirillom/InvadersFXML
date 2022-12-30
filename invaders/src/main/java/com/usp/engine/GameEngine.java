@@ -52,10 +52,20 @@ public class GameEngine {
     public void enemyShooting(Pane root, List<Sprite> enemies, double t){
         for (Sprite s : enemies) {
             if (t > 2) {
-                if (Math.random() < 0.01) {
+                if (Math.random() < 0.5) {
                     root.getChildren().add(((Enemy) s).shoot());
                 }
             }
+        }
+    }
+
+    void testCollision(Sprite a, Sprite b, Pane root){
+        if (a.getBoundsInParent().intersects(b.getBoundsInParent())) {
+            a.damage();
+            b.damage();
+            
+            Sprite explosion = new Sprite((int) a.getTranslateX(), (int) a.getTranslateY(), 45, 45, "explosion", "explosion.gif");
+            root.getChildren().add(explosion);
         }
     }
 
@@ -67,60 +77,24 @@ public class GameEngine {
 
             switch (s.type) {
                 case "enemybullet":
-                    if (s.getBoundsInParent().intersects(player.getBoundsInParent())) {
-                        player.life--;
-                        s.life--;
-                        
-                        Sprite explosion = new Sprite((int) s.getTranslateX(), (int) s.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                        root.getChildren().add(explosion);
-                    }
+                    testCollision(player, s, root);
 
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
-                        if (s.getBoundsInParent().intersects(barrier.getBoundsInParent())) {
-                            Barrier b = (Barrier) barrier;
-                            b.damage();
-                            s.life--;
-
-                            Sprite explosion = new Sprite((int) barrier.getTranslateX() - 20, (int) barrier.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                            root.getChildren().add(explosion);
-                        }
+                        testCollision(barrier, s, root);
                     });
                     break;
                     
                 case "playerbullet":
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).forEach(enemy -> {
-                        if (s.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
-                            enemy.life--;
-                            s.life--;
-
-                            Enemy alien = (Enemy) enemy;
-                            addPoints(alien.points);
-                            
-                            Sprite explosion = new Sprite((int) enemy.getTranslateX(), (int) enemy.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                            root.getChildren().add(explosion);
-                        }
+                        testCollision(enemy, s, root);
                     });
                     
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemybullet")).forEach(bullet -> {
-                        if (s.getBoundsInParent().intersects(bullet.getBoundsInParent())) {
-                            bullet.life--;
-                            s.life--;
-
-                            Sprite explosion = new Sprite((int) bullet.getTranslateX() - 20, (int) bullet.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                            root.getChildren().add(explosion);
-                        }
+                        testCollision(bullet, s, root);
                     });
 
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
-                        if (s.getBoundsInParent().intersects(barrier.getBoundsInParent())) {
-                            System.out.println("Player bullet collided with barrier");
-                            Barrier b = (Barrier) barrier;
-                            b.damage();
-                            s.life--;
-
-                            Sprite explosion = new Sprite((int) barrier.getTranslateX() - 20, (int) barrier.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                            root.getChildren().add(explosion);
-                        }
+                        testCollision(barrier, s, root);
                     });
                     break;
 

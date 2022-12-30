@@ -11,8 +11,8 @@ public class Bullet extends Sprite {
         if(origin.equals("enemy")){
             setDir(0, 1);
         }
-        
-        this.speed = 2;
+
+        this.speed = 3;
         this.life = 1;
     }
 
