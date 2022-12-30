@@ -5,4 +5,7 @@ module com.usp {
 
     opens com.usp to javafx.fxml;
     exports com.usp;
+
+    opens com.usp.engine to javafx.fxml;
+    exports com.usp.engine;
 }

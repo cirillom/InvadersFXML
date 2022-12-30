@@ -1,6 +1,8 @@
-package com.usp;
+package com.usp.engine;
 
 import java.io.IOException;
+
+import com.usp.App;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
