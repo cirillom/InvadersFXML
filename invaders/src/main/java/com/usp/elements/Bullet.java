@@ -21,36 +21,18 @@ public class Bullet extends Sprite {
         double yPos = getTranslateY();
         
         if(xPos + xDir < 0 || xPos + xDir > (560 - getImage().getWidth())) {
-            dead = true;
+            life--;
             return;
         }
         xPos += (xDir*speed);
         setTranslateX(xPos);
         
         if(yPos + yDir < 0 || yPos + yDir > (640 - getImage().getHeight())) {
-            dead = true;
+            life--;
             return;
         }
         
         yPos += (yDir*speed);
         setTranslateY(yPos);
-    }
-
-    public void moveUp() {
-        double next_pos = getTranslateY() - 5;
-        if(next_pos < 0){
-            dead = true;
-            return;
-        }
-        setTranslateY(next_pos);
-    }
-    
-    public void moveDown() {
-        double next_pos = getTranslateY() + 5;
-        if(next_pos > (640 - getImage().getWidth())){
-            dead = true;
-            return;
-        }
-        setTranslateY(next_pos);
     }
 }
