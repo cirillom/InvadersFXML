@@ -9,11 +9,10 @@ import javafx.scene.image.Image;
 
 public class Barrier extends Sprite{
     String file[];
-    public Barrier(int x, int y, String file[]) {
-        super(x, y, 15, 15, "barrier", file[file.length - 1]);
-        changeImage(type);
+    public Barrier(int x, int y) {
+        super(x, y, 15, 15, "barrier", "b_deg_1.png");
+        file = new String[] {"b_dest.png", "b_deg_4.png","b_deg_3.png","b_deg_2.png"};
         this.life = file.length;        
-        this.file = file;
     }
 
     private void changeImage(String file){
@@ -28,8 +27,11 @@ public class Barrier extends Sprite{
     }
 
     public void damage(){
+        System.out.println("Damaging barrier: " + life);
         life--;
-        changeImage(file[life]);
+        System.out.println("Barrier damaged: " + life);
+        if(life >= 0)
+            changeImage(file[life]);
         //TODO change sprite
     }
 }

@@ -61,8 +61,7 @@ public class GameController{
         final int spacing = 40;
 
         for (int i = 0; i<5; i++){
-            String barImages[] = new String[] {"bullet.png"}; 
-            Barrier barrier = new Barrier(50 + 5*i, 500, barImages);
+            Barrier barrier = new Barrier(50 + 15*i, 500);
             root.getChildren().add(barrier);
 
         }
@@ -170,6 +169,7 @@ public class GameController{
 
                     sprites().stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
                         if (s.getBoundsInParent().intersects(barrier.getBoundsInParent())) {
+                            System.out.println("Player bullet collided with barrier");
                             Barrier b = (Barrier) barrier;
                             b.damage();
                             s.life--;
@@ -188,11 +188,8 @@ public class GameController{
                         }
 
                         if (s.getBoundsInParent().intersects(player.getBoundsInParent())) {
-                            player.life--;
-                            s.life--;
-                            
-                            Sprite explosion = new Sprite((int) s.getTranslateX(), (int) s.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-                            root.getChildren().add(explosion);
+                            //TODO LOSES GAME
+                            player.life = 0;
                         }
                     break;
                 }
@@ -201,7 +198,9 @@ public class GameController{
         //remove dead entities
         root.getChildren().removeIf(n -> {
             Sprite s = (Sprite) n;
-            if(s.life <= 0) return true;
+            if(s.life <= 0) {
+                return true;
+            }
             return false;
         });
 
@@ -228,7 +227,7 @@ public class GameController{
                 player.setDir(1,0);
                 break;
             case SPACE:
-                if(sprites().stream().filter(s -> s.type.equals("playerbullet")).count() < 3){
+                if(sprites().stream().filter(s -> s.type.equals("playerbullet")).count() < 1){
                     shoot(player);
                 }
                 break;
