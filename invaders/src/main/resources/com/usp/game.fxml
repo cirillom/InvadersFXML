@@ -37,4 +37,11 @@
    <center>
       <Pane fx:id="root" focusTraversable="true" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" prefHeight="640.0" prefWidth="560.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <Label fx:id="gamePaused" text="JOGO PAUSADO" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Pixeboy" size="96.0" />
+         </font>
+      </Label>
+   </bottom>
 </BorderPane>

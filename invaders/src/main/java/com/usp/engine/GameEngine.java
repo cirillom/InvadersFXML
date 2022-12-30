@@ -2,7 +2,6 @@ package com.usp.engine;
 
 import java.util.List;
 
-import com.usp.elements.Barrier;
 import com.usp.elements.Enemy;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
@@ -18,10 +17,9 @@ public class GameEngine {
     public void start(){
         alienDir = new int[] {1,0};
         points_value = 0;
-        //setPoints(0);
     }
 
-    private void addPoints(int value){
+    public void addPoints(int value){
         points_value += value;
         if(high_score_value < points_value){
             high_score_value = points_value;
@@ -59,14 +57,17 @@ public class GameEngine {
         }
     }
 
-    void testCollision(Sprite a, Sprite b, Pane root){
-        if (a.getBoundsInParent().intersects(b.getBoundsInParent())) {
-            a.damage();
-            b.damage();
-            
-            Sprite explosion = new Sprite((int) a.getTranslateX(), (int) a.getTranslateY(), 45, 45, "explosion", "explosion.gif");
-            root.getChildren().add(explosion);
-        }
+    public void cleanPane(Pane root){
+        root.getChildren().removeIf(n -> {
+            Sprite s = (Sprite) n;
+            if(s.life <= 0) {
+                if(s.type == "enemy"){
+                    addPoints(((Enemy)s).points);
+                }
+                return true;
+            }
+            return false;
+        });
     }
 
     public void moveAndCheckCollision(Pane root){
@@ -105,5 +106,15 @@ public class GameEngine {
                     break;
                 }
         });
+    }
+
+    void testCollision(Sprite a, Sprite b, Pane root){
+        if (a.getBoundsInParent().intersects(b.getBoundsInParent())) {
+            a.damage();
+            b.damage();
+            
+            Sprite explosion = new Sprite((int) a.getTranslateX(), (int) a.getTranslateY(), 45, 45, "explosion", "explosion.gif");
+            root.getChildren().add(explosion);
+        }
     }
 }

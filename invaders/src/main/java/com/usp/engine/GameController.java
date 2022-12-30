@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.usp.App;
-import com.usp.elements.Barrier;
-import com.usp.elements.Enemy;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
 import com.usp.graphics.LevelDesigner;
@@ -20,12 +18,14 @@ import javafx.scene.layout.Pane;
 public class GameController{
     private Player player;
     private double t = 0;
+    private boolean paused = false;
+    private boolean pauseaux = false; //this variable helps that paused only runs once at keyPressed
     
     @FXML
     private Pane root;
 
     @FXML
-    private Label points, high_score, life_count;
+    private Label points, high_score, life_count, gamePaused;
 
     @FXML
     public void initialize(){
@@ -51,6 +51,12 @@ public class GameController{
     }
 
     private void update() {
+        if(paused){
+            gamePaused.setText("JOGO PAUSADO");
+            return;
+        }
+        gamePaused.setText("");
+
         if(player.life == 0){
             try {
                 App.setRoot("endscreen");
@@ -66,20 +72,17 @@ public class GameController{
         life_count.setText("Vidas: " + player.life);
 
         List<Sprite> enemies = LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).map(n -> (Sprite)n).collect(Collectors.toList());
+        
+        if(enemies.size() == 0){
+            LevelDesigner.nextLevel(root);
+        }
         gameEngine.setEnemyMovement(enemies);
 
         gameEngine.moveAndCheckCollision(root);
 
         gameEngine.enemyShooting(root, enemies, t);
         
-        //remove dead entities
-        root.getChildren().removeIf(n -> {
-            Sprite s = (Sprite) n;
-            if(s.life <= 0) {
-                return true;
-            }
-            return false;
-        });
+        gameEngine.cleanPane(root);
 
         if (t > 2) {
             t = 0;
@@ -100,6 +103,12 @@ public class GameController{
                     root.getChildren().add(player.shoot());
                 }
                 break;
+            case ESCAPE:
+                if(!pauseaux){
+                    paused = !paused;
+                    pauseaux = true;
+                }
+                break;
                 
             default:
                 break;
@@ -115,6 +124,11 @@ public class GameController{
             case D:
                 if(player.getDirX() == 1)
                     player.setDir(0,0);
+                break;
+            case ESCAPE:
+                if(pauseaux){
+                    pauseaux = false;
+                }
                 break;
             default:
                 break;
