@@ -9,6 +9,13 @@ public class Enemy extends Sprite{
         this.speed = 0.5;
     }
 
+    public Bullet shoot() {
+        double middle = getImage().getWidth() / 2;
+        Bullet bullet = new Bullet((int) (getTranslateX() + middle), (int) getTranslateY(), type);
+
+        return bullet;
+    }
+
     public int[] tryMove(){
         double xPos = getTranslateX();
         double yPos = getTranslateY();

@@ -6,12 +6,14 @@ public class Player extends Sprite{
         this.life = 4;
     }
 
+    public Bullet shoot() {
+        double middle = getImage().getWidth() / 2;
+        Bullet bullet = new Bullet((int) (getTranslateX() + middle), (int) getTranslateY(), type);
+
+        return bullet;
+    }
+
     public int getDirX(){
         return xDir;
     }
-
-    public int getDirY(){
-        return yDir;
-    }
-
 }

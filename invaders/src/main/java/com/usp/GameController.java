@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.usp.elements.Barrier;
-import com.usp.elements.Bullet;
 import com.usp.elements.Enemy;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
@@ -30,11 +29,6 @@ public class GameController{
     private int points_value, high_score_value;
 
     @FXML
-    void pauseGame(ActionEvent event)  throws IOException {
-        //App.setRoot("menu");
-    }
-
-    @FXML
     public void initialize(){
         start();
     }
@@ -52,7 +46,7 @@ public class GameController{
     
         LevelDesigner.nextLevel(root);
         alienDir = new int[] {1,0};
-        addPoints(0);
+        setPoints(0);
         player = (Player) root.getChildren().get(0);
     }
 
@@ -62,14 +56,12 @@ public class GameController{
         //check if player is dead
         if(player.life == 0){
             System.out.println("GAME OVER");
+            //App.setRoot("menu");
+            //TODO load last scene
             return;
-            //GAME OVER, LOAD LAST SCENE
         }
         life_count.setText("Vidas: " + player.life);
 
-        //set player movement direction
-
-        //find enemy movement direction
         List<Sprite> enemies = LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).map(n -> (Sprite)n).collect(Collectors.toList());
         for(Sprite e : enemies){
             Enemy alien = (Enemy)e;
@@ -77,6 +69,7 @@ public class GameController{
             int ret[] = alien.tryMove();
             if(ret == null){
                 //gameOver = true;
+                //TODO enemies exited at the end of the screen, do something
                 break;
             }
             if(ret[0] != alienDir[0] && ret[1] != alienDir[1]){
@@ -89,8 +82,6 @@ public class GameController{
             e.setDir(alienDir[0], alienDir[1]);
         }
 
-        //move all entities 
-        //(and check for collision) (check for out of bounds)     
         LevelDesigner.sprites(root).forEach(s -> {
             s.move();
 
@@ -122,7 +113,6 @@ public class GameController{
                             enemy.life--;
                             s.life--;
 
-                            //TODO GIVE PLAYER POINTS FROM ENEMY
                             Enemy alien = (Enemy) enemy;
                             addPoints(alien.points);
                             
@@ -157,12 +147,11 @@ public class GameController{
                 case "enemy":
                         if (t > 2) {
                             if (Math.random() < 0.01) {
-                                shoot(s);
+                                root.getChildren().add(((Enemy) s).shoot());
                             }
                         }
 
                         if (s.getBoundsInParent().intersects(player.getBoundsInParent())) {
-                            //TODO LOSES GAME
                             player.life = 0;
                         }
                     break;
@@ -191,13 +180,10 @@ public class GameController{
         points.setText(points_value + "pts");
         high_score.setText(high_score_value + "pts");
     }
-
-    private void shoot(Sprite who) {
-        //Sprite s = new Sprite((int) who.getTranslateX() + 20, (int) who.getTranslateY(), 5, 20, who.type + "bullet", "bullet.png");
-        double middle = who.getImage().getWidth() / 2;
-        Bullet b = new Bullet((int) (who.getTranslateX() + middle), (int) who.getTranslateY(), who.type);
-
-        root.getChildren().add(b);
+    
+    private void setPoints(int value){
+        points_value = value;
+        points.setText(points_value + "pts");
     }
 
     @FXML
@@ -211,7 +197,7 @@ public class GameController{
                 break;
             case SPACE:
                 if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 1){
-                    shoot(player);
+                    root.getChildren().add(player.shoot());
                 }
                 break;
         }
