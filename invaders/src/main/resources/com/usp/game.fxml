@@ -11,19 +11,19 @@
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" text="999 pts" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="points" alignment="CENTER" text="999 pts" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="28.0" />
                </font>
             </Label>
             <Pane prefHeight="50.0" prefWidth="100.0" />
-            <Label alignment="CENTER" text="12359 pts" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="high_score" alignment="CENTER" text="12359 pts" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="28.0" />
                </font>
             </Label>
             <Pane prefHeight="50.0" prefWidth="100.0" />
-            <Label alignment="CENTER" text="Vidas: 4" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="life_count" alignment="CENTER" text="Vidas: 4" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Pixeboy" size="28.0" />
                </font>

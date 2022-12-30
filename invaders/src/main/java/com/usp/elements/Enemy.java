@@ -1,10 +1,11 @@
 package com.usp.elements;
 
 public class Enemy extends Sprite{
-    int points;
+    public int points;
     public Enemy(int x, int y, int w, int h, String file, int points){
         super(x, y, w, h, "enemy", file);
         this.points = points;
+        this.life = 1;
         this.speed = 0.5;
     }
 

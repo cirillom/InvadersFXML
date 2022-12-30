@@ -10,10 +10,10 @@ import com.usp.elements.Enemy;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
 
+import javafx.fxml.FXML;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
@@ -23,6 +23,10 @@ public class GameController{
     
     @FXML
     private Pane root;
+
+    @FXML
+    private Label points, high_score, life_count;
+    private int points_value, high_score_value;
 
     @FXML
     void pauseGame(ActionEvent event)  throws IOException {
@@ -55,6 +59,7 @@ public class GameController{
         root.getChildren().add(player);
 
         alienDir = new int[] {1,0};
+        addPoints(0);
 
         final int initialx = 80;
         final int initialy = 150;
@@ -94,6 +99,7 @@ public class GameController{
             return;
             //GAME OVER, LOAD LAST SCENE
         }
+        life_count.setText("Vidas: " + player.life);
 
         //set player movement direction
 
@@ -151,6 +157,8 @@ public class GameController{
                             s.life--;
 
                             //TODO GIVE PLAYER POINTS FROM ENEMY
+                            Enemy alien = (Enemy) enemy;
+                            addPoints(alien.points);
                             
                             Sprite explosion = new Sprite((int) enemy.getTranslateX(), (int) enemy.getTranslateY(), 45, 45, "explosion", "explosion.gif");
                             root.getChildren().add(explosion);
@@ -207,6 +215,15 @@ public class GameController{
         if (t > 2) {
             t = 0;
         }
+    }
+
+    private void addPoints(int value){
+        points_value += value;
+        if(high_score_value < points_value){
+            high_score_value = points_value;
+        }
+        points.setText(points_value + "pts");
+        high_score.setText(high_score_value + "pts");
     }
 
     private void shoot(Sprite who) {

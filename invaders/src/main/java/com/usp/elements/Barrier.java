@@ -27,11 +27,8 @@ public class Barrier extends Sprite{
     }
 
     public void damage(){
-        System.out.println("Damaging barrier: " + life);
         life--;
-        System.out.println("Barrier damaged: " + life);
         if(life >= 0)
             changeImage(file[life]);
-        //TODO change sprite
     }
 }
