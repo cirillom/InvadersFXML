@@ -1,6 +1,5 @@
 package com.usp;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,6 @@ import com.usp.graphics.LevelDesigner;
 
 import javafx.fxml.FXML;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -26,7 +24,8 @@ public class GameController{
 
     @FXML
     private Label points, high_score, life_count;
-    private int points_value, high_score_value;
+    private static int high_score_value;
+    private int points_value;
 
     @FXML
     public void initialize(){
@@ -56,7 +55,7 @@ public class GameController{
         //check if player is dead
         if(player.life == 0){
             System.out.println("GAME OVER");
-            //App.setRoot("menu");
+            //App.setRoot("endgame");
             //TODO load last scene
             return;
         }
@@ -200,6 +199,9 @@ public class GameController{
                     root.getChildren().add(player.shoot());
                 }
                 break;
+                
+            default:
+                break;
         }
     }
     @FXML
@@ -212,6 +214,8 @@ public class GameController{
             case D:
                 if(player.getDirX() == 1)
                     player.setDir(0,0);
+                break;
+            default:
                 break;
         }
     }
