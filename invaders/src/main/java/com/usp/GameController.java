@@ -9,6 +9,7 @@ import com.usp.elements.Bullet;
 import com.usp.elements.Enemy;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
+import com.usp.graphics.LevelDesigner;
 
 import javafx.fxml.FXML;
 import javafx.animation.AnimationTimer;
@@ -38,6 +39,7 @@ public class GameController{
         start();
     }
     
+    int[] alienDir;
     private void start(){
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -47,47 +49,11 @@ public class GameController{
         };
         
         timer.start();
-
-        nextLevel();
-    }
     
-    int[] alienDir;
-    private void nextLevel() {
-        //this shouldn't be here
-        root.getChildren().clear();
-        player = new Player(50, 545);
-        root.getChildren().add(player);
-
+        LevelDesigner.nextLevel(root);
         alienDir = new int[] {1,0};
         addPoints(0);
-
-        final int initialx = 80;
-        final int initialy = 150;
-        final int spacing = 40;
-
-        for (int i = 0; i<5; i++){
-            Barrier barrier = new Barrier(50 + 15*i, 500);
-            root.getChildren().add(barrier);
-
-        }
-
-        for (int i = 0; i < 11; i++) {
-            Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 10);
-            Enemy b = new Enemy(initialx + i*spacing, initialy + 1 * spacing, 28, 20, "medium_invader.gif", 5);
-            Enemy c = new Enemy(initialx + i*spacing, initialy + 2 * spacing, 28, 20, "medium_invader.gif", 5);
-            Enemy d = new Enemy(initialx + i*spacing, initialy + 3 * spacing, 30, 20, "large_invader.gif", 3);
-            Enemy e = new Enemy(initialx + i*spacing, initialy + 4 * spacing, 30, 20, "large_invader.gif", 3);
-
-            root.getChildren().add(a);
-            root.getChildren().add(b);
-            root.getChildren().add(c);
-            root.getChildren().add(d);
-            root.getChildren().add(e);
-        }
-    }
-
-    private List<Sprite> sprites() {
-        return root.getChildren().stream().map(n -> (Sprite)n).collect(Collectors.toList());
+        player = (Player) root.getChildren().get(0);
     }
 
     private void update() {
@@ -104,7 +70,7 @@ public class GameController{
         //set player movement direction
 
         //find enemy movement direction
-        List<Sprite> enemies = sprites().stream().filter(e -> e.type.equals("enemy")).map(n -> (Sprite)n).collect(Collectors.toList());
+        List<Sprite> enemies = LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).map(n -> (Sprite)n).collect(Collectors.toList());
         for(Sprite e : enemies){
             Enemy alien = (Enemy)e;
             
@@ -125,7 +91,7 @@ public class GameController{
 
         //move all entities 
         //(and check for collision) (check for out of bounds)     
-        sprites().forEach(s -> {
+        LevelDesigner.sprites(root).forEach(s -> {
             s.move();
 
             switch (s.type) {
@@ -138,7 +104,7 @@ public class GameController{
                         root.getChildren().add(explosion);
                     }
 
-                    sprites().stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
+                    LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
                         if (s.getBoundsInParent().intersects(barrier.getBoundsInParent())) {
                             Barrier b = (Barrier) barrier;
                             b.damage();
@@ -151,7 +117,7 @@ public class GameController{
                     break;
                     
                 case "playerbullet":
-                    sprites().stream().filter(e -> e.type.equals("enemy")).forEach(enemy -> {
+                    LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).forEach(enemy -> {
                         if (s.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
                             enemy.life--;
                             s.life--;
@@ -165,7 +131,7 @@ public class GameController{
                         }
                     });
                     
-                    sprites().stream().filter(e -> e.type.equals("enemybullet")).forEach(bullet -> {
+                    LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemybullet")).forEach(bullet -> {
                         if (s.getBoundsInParent().intersects(bullet.getBoundsInParent())) {
                             bullet.life--;
                             s.life--;
@@ -175,7 +141,7 @@ public class GameController{
                         }
                     });
 
-                    sprites().stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
+                    LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
                         if (s.getBoundsInParent().intersects(barrier.getBoundsInParent())) {
                             System.out.println("Player bullet collided with barrier");
                             Barrier b = (Barrier) barrier;
@@ -244,7 +210,7 @@ public class GameController{
                 player.setDir(1,0);
                 break;
             case SPACE:
-                if(sprites().stream().filter(s -> s.type.equals("playerbullet")).count() < 1){
+                if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 1){
                     shoot(player);
                 }
                 break;
