@@ -19,7 +19,7 @@ public class GameController{
     private Player player;
     private double t = 0;
     private boolean paused = false;
-    private boolean pauseaux = false; //this variable helps that paused only runs once at keyPressed
+    private boolean oneKeyPress = false; //this variable helps that paused only runs once at keyPressed
     
     @FXML
     private Pane root;
@@ -48,16 +48,16 @@ public class GameController{
 
         LevelDesigner.nextLevel(root);
         gameEngine.start();
-        player = (Player) root.getChildren().get(0);
     }
-
+    
     private void update() {
         if(paused){
             gamePaused.setText("JOGO PAUSADO");
             return;
         }
         gamePaused.setText("");
-
+        
+        player = (Player) root.getChildren().get(0);
         if(player.life == 0){
             try {
                 timer.stop();
@@ -69,9 +69,9 @@ public class GameController{
         }
 
         t += 0.016;
+        life_count.setText("Vidas: " + player.life);
         points.setText(gameEngine.points_value + "pts");
         high_score.setText(GameEngine.high_score_value + "pts");
-        life_count.setText("Vidas: " + player.life);
 
         List<Sprite> enemies = LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).map(n -> (Sprite)n).collect(Collectors.toList());
         
@@ -101,14 +101,17 @@ public class GameController{
                 player.setDir(1,0);
                 break;
             case SPACE:
-                if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 1){
-                    root.getChildren().add(player.shoot());
+                if(!oneKeyPress){
+                    if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 10){
+                        root.getChildren().add(player.shoot());
+                    }
+                    oneKeyPress = true;
                 }
                 break;
             case ESCAPE:
-                if(!pauseaux){
+                if(!oneKeyPress){
                     paused = !paused;
-                    pauseaux = true;
+                    oneKeyPress = true;
                 }
                 break;
                 
@@ -127,9 +130,14 @@ public class GameController{
                 if(player.getDirX() == 1)
                     player.setDir(0,0);
                 break;
+            case SPACE:
+                if(oneKeyPress){
+                    oneKeyPress = false;
+                }
+                break;
             case ESCAPE:
-                if(pauseaux){
-                    pauseaux = false;
+                if(oneKeyPress){
+                    oneKeyPress = false;
                 }
                 break;
             default:

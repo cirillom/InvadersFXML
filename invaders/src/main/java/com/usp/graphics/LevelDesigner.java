@@ -28,7 +28,7 @@ public class LevelDesigner {
         final int initialx = 80;
         final int initialy = 100;
         final int spacing = 40;
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 9; i++) {
             Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 40);
             Enemy b = new Enemy(initialx + i*spacing, initialy + 1 * spacing, 28, 20, "medium_invader.gif", 20);
             Enemy c = new Enemy(initialx + i*spacing, initialy + 2 * spacing, 28, 20, "medium_invader.gif", 20);
