@@ -40,11 +40,17 @@ public class Sprite extends ImageView {
         double xPos = getTranslateX();
         double yPos = getTranslateY();
         
-        if(xPos + xDir < 0 || xPos + xDir > (560 - getImage().getWidth())) return;
+        if(xPos + xDir < 0 || xPos + xDir > (560 - getImage().getWidth())) {
+            life--;
+            return;
+        }
         xPos += (xDir*speed);
         setTranslateX(xPos);
         
-        if(yPos + yDir < 0 || yPos + yDir > (640 - getImage().getHeight())) return;
+        if(yPos + yDir < 0 || yPos + yDir > (640 - getImage().getHeight())) {
+            life--;
+            return;
+        }
         
         yPos += (yDir*speed);
         setTranslateY(yPos);
