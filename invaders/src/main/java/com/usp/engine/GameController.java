@@ -34,8 +34,9 @@ public class GameController{
     
     int[] alienDir;
     GameEngine gameEngine;
+    AnimationTimer timer;
     private void start(){
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 update();
@@ -59,6 +60,7 @@ public class GameController{
 
         if(player.life == 0){
             try {
+                timer.stop();
                 App.setRoot("endscreen");
             } catch (IOException e1) {
                 e1.printStackTrace();
