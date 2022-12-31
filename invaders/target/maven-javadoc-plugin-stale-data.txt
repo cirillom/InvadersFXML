@@ -1,0 +1,55 @@
+@options
+@packages
+@argfile
+--class-path
+'/home/cillor/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar:/home/cillor/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar:/home/cillor/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar:/home/cillor/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar'
+--module-path
+'/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/classes:/home/cillor/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-linux.jar:/home/cillor/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-linux.jar:/home/cillor/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-linux.jar:/home/cillor/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-linux.jar'
+--patch-module
+com.usp='/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/src/main/java'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'invaders 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'invaders 1.0-SNAPSHOT API'
+com.usp.engine
+com.usp
+com.usp.graphics
+com.usp.elements
+'/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/src/main/java/module-info.java'
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/module-search-index.js = 1672460006879
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/element-list = 1672460006799
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/index.html = 1672460006895
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/jquery-ui.overrides.css = 1672460006903
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/script.js = 1672460006899
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/copy.svg = 1672460006899
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/package-search-index.js = 1672460006879
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/member-search-index.js = 1672460006883
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/allpackages-index.html = 1672460006879
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/overview-tree.html = 1672460006867
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/type-search-index.js = 1672460006879
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/tag-search-index.js = 1672460006883
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/stylesheet.css = 1672460006899
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/help-doc.html = 1672460006899
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/allclasses-index.html = 1672460006879
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/index-all.html = 1672460006895
+/home/cillor/OneDriv/USP/4Periodo/POO/InvadersFXML/invaders/target/site/apidocs/search.js = 1672460006899
