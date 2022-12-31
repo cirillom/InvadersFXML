@@ -102,7 +102,7 @@ public class GameController{
                 break;
             case SPACE:
                 if(!oneKeyPress){
-                    if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 10){
+                    if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 3){
                         root.getChildren().add(player.shoot());
                     }
                     oneKeyPress = true;
