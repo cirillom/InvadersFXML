@@ -22,7 +22,7 @@ public class LevelDesigner {
     /**
      * Gets a list of all the sprites in a Pane root
      * @param root 
-     * @return List<Sprite>
+     * @return List of Sprite
      */
     public static List<Sprite> sprites(Pane root) {
         return root.getChildren().stream().map(n -> (Sprite)n).collect(Collectors.toList());

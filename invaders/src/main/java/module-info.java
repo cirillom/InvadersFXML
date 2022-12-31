@@ -11,4 +11,6 @@ module com.usp {
 
     opens com.usp.elements to com.usp.engine;
     exports com.usp.elements;
+    
+    exports com.usp.graphics;
 }
