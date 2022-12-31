@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.usp.App;
-import com.usp.elements.Mothership;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
 import com.usp.graphics.LevelDesigner;
@@ -16,11 +15,17 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * The controller from the game scene
+ */
 public class GameController{
     private Player player;
     private double t = 0;
+    /**
+     * Pauses the game if player dies or player ask's
+     */
     public static boolean paused = false;
-    private boolean oneKeyPress = false; //this variable helps that paused only runs once at keyPressed
+    private boolean oneKeyPress = false; //this variable garantees that keys that need will only be pressed once at keyPressed
     
     @FXML
     private Pane root;
@@ -51,6 +56,9 @@ public class GameController{
         gameEngine.start();
     }
     
+    /**
+     * The main game loop, where the magic happens
+     */
     private void update() {
         if(paused){
             return;
@@ -81,18 +89,13 @@ public class GameController{
         gameEngine.setEnemyMovement(enemies);
 
         gameEngine.moveAndCheckCollision(root);
-
-        gameEngine.enemyShooting(root, enemies, t);
         
-        gameEngine.cleanPane(root);
-
-        if (t > 2) {
-            if (Math.random() < 0.05 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
-                int points = 20 * LevelDesigner.phase + (int) (Math.random() * 250);
-                root.getChildren().add(new Mothership(20, 40, 15, "ufo.png", points));
-            }
+        if (t > 2) { //every two seconds it tries to shoot and spawn an UFO
+            gameEngine.enemyShooting(root, enemies);
+            gameEngine.UFOAppearance(root);
             t = 0;
         }
+        gameEngine.cleanPane(root);
     }
 
     @FXML
