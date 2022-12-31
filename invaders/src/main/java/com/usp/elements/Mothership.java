@@ -20,4 +20,17 @@ public class Mothership extends Sprite{
         this.life = 1;
         this.xDir = 1;
     }
+    
+        public void move(){
+        if(xDir == 0) return;
+        
+        double xPos = getTranslateX();
+        
+        if(xPos + xDir < 0 || xPos + xDir > (560 - getImage().getWidth())) {
+            life--;
+            return;
+        }
+        xPos += (xDir*speed);
+        setTranslateX(xPos);
+    }
 }

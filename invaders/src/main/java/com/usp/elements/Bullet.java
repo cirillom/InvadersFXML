@@ -24,4 +24,20 @@ public class Bullet extends Sprite {
         this.speed = 5;
         this.life = 1;
     }
+    
+    /**
+    * Moves the sprite
+    */
+    public void move(){
+        if(yDir == 0) return;
+        double yPos = getTranslateY();
+        
+        if(yPos + yDir < 0 || yPos + yDir > (640 - getImage().getHeight())) {
+            life--;
+            return;
+        }
+        
+        yPos += (yDir*speed);
+        setTranslateY(yPos);
+    }
 }
