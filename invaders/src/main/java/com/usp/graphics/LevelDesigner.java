@@ -11,6 +11,7 @@ import com.usp.elements.Sprite;
 import javafx.scene.layout.Pane;
 
 public class LevelDesigner {
+    public static int phase;
     public static List<Sprite> sprites(Pane root) {
         return root.getChildren().stream().map(n -> (Sprite)n).collect(Collectors.toList());
     }
@@ -22,11 +23,13 @@ public class LevelDesigner {
 
         EnemyLayout(root);
         BarrierLayout(root);
+        phase++;
     }
 
     private static void EnemyLayout(Pane root){
         final int initialx = 80;
-        final int initialy = 100;
+        final int initialy = 40 + 20 * phase;
+        System.out.println(initialy);
         final int spacing = 40;
         for (int i = 0; i < 11; i++) {
             Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 40);
@@ -44,9 +47,13 @@ public class LevelDesigner {
     }
 
     private static void BarrierLayout(Pane root){
-        for (int i = 0; i<5; i++){
-            Barrier barrier = new Barrier(50 + 15*i, 500);
-            root.getChildren().add(barrier);
+        for (int b = 0; b < 3; b++){
+            for (int i = 0; i < 3; i++){
+                for (int j = 0; j < 2; j++){
+                    Barrier barrier = new Barrier( (80 + b*178) + 15*i, 500 - 15*j);
+                    root.getChildren().add(barrier);
+                }
+            }
         }
     }
 }
