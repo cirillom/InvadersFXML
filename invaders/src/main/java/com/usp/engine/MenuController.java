@@ -7,6 +7,9 @@ import com.usp.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+/**
+ * The menu controller only purpose is to initialize the actual game
+ */
 public class MenuController {
     @FXML
     void startGame(ActionEvent event) throws IOException {
