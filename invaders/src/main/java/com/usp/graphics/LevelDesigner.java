@@ -29,7 +29,6 @@ public class LevelDesigner {
     private static void EnemyLayout(Pane root){
         final int initialx = 80;
         final int initialy = 40 + 20 * phase;
-        System.out.println(initialy);
         final int spacing = 40;
         for (int i = 0; i < 11; i++) {
             Enemy a = new Enemy(initialx + i*spacing, initialy + 0 * spacing, 20, 20, "small_invader.gif", 40);
