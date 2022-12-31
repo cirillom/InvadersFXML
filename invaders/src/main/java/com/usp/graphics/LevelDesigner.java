@@ -10,12 +10,28 @@ import com.usp.elements.Sprite;
 
 import javafx.scene.layout.Pane;
 
+/**
+ * LevelDesigner is responsable for drawing the game elements life enemies and barriers
+ */
 public class LevelDesigner {
+    /**
+     * Keeps track of the number of phases in order to spawn enemies only line below everytime
+     */
     public static int phase;
+
+    /**
+     * Gets a list of all the sprites in a Pane root
+     * @param root 
+     * @return List<Sprite>
+     */
     public static List<Sprite> sprites(Pane root) {
         return root.getChildren().stream().map(n -> (Sprite)n).collect(Collectors.toList());
     }
 
+    /**
+     * Initializes the next level in a pane root
+     * @param root
+     */
     public static void nextLevel(Pane root) {
         root.getChildren().clear();
 
@@ -26,6 +42,10 @@ public class LevelDesigner {
         phase++;
     }
 
+    /**
+     * Position the enemies on screen in an especific layout in a Pane root
+     * @param root
+     */
     private static void EnemyLayout(Pane root){
         final int initialx = 80;
         final int initialy = 40 + 20 * phase;
@@ -45,6 +65,10 @@ public class LevelDesigner {
         }
     }
 
+    /**
+     * Position the barriers on screen in an especific layout in a Pane root
+     * @param root
+     */
     private static void BarrierLayout(Pane root){
         for (int b = 0; b < 3; b++){
             for (int i = 0; i < 3; i++){
