@@ -88,7 +88,7 @@ public class GameEngine {
     public void UFOAppearance(Pane root){
         if (Math.random() < 0.05 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
             int points = 20 * LevelDesigner.phase + (int) (Math.random() * 250);
-            root.getChildren().add(new Mothership(20, 40, 15, "ufo.png", points));
+            root.getChildren().add(new Mothership(points));
         }
     }
 
