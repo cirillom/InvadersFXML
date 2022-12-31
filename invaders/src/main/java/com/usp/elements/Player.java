@@ -1,5 +1,7 @@
 package com.usp.elements;
 
+import com.usp.engine.GameController;
+
 public class Player extends Sprite{
     int x, y;
     public Player(int x, int y) {
@@ -19,6 +21,7 @@ public class Player extends Sprite{
 
     public void damage(){
         life--;
+        GameController.paused = true;
         setTranslateX(x);
         setTranslateY(y);
     }

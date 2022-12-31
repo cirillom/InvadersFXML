@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 public class GameController{
     private Player player;
     private double t = 0;
-    private boolean paused = false;
+    public static boolean paused = false;
     private boolean oneKeyPress = false; //this variable helps that paused only runs once at keyPressed
     
     @FXML
@@ -53,7 +53,6 @@ public class GameController{
     
     private void update() {
         if(paused){
-            gamePaused.setText("JOGO PAUSADO");
             return;
         }
         gamePaused.setText("");
@@ -111,11 +110,16 @@ public class GameController{
                         root.getChildren().add(player.shoot());
                     }
                     oneKeyPress = true;
+                    paused = false;
                 }
                 break;
             case ESCAPE:
                 if(!oneKeyPress){
                     paused = !paused;
+                    if(paused == true) {
+                        gamePaused.setText("JOGO PAUSADO");
+                    }
+
                     oneKeyPress = true;
                 }
                 break;
