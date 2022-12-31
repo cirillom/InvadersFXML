@@ -12,7 +12,7 @@ public class Bullet extends Sprite {
             setDir(0, 1);
         }
 
-        this.speed = 3;
+        this.speed = 5;
         this.life = 1;
     }
 
