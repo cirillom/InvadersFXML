@@ -51,6 +51,10 @@ public class Sprite extends ImageView {
         setTranslateY(yPos);
     }
 
+    public void setSpeed(double speed){
+        this.speed = speed;
+    }
+
     public void damage(){
         life--;
     }

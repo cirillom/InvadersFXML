@@ -43,6 +43,7 @@ public class GameEngine {
         }
 
         for(Sprite e : enemies){
+            e.setSpeed((enemies.size()/-108.0) + (109.0/108.0));
             e.setDir(alienDir[0], alienDir[1]);
         }
     }
@@ -50,7 +51,7 @@ public class GameEngine {
     public void enemyShooting(Pane root, List<Sprite> enemies, double t){
         for (Sprite s : enemies) {
             if (t > 2) {
-                if (Math.random() < 0.5) {
+                if (Math.random() < 0.01) {
                     root.getChildren().add(((Enemy) s).shoot());
                 }
             }
@@ -61,7 +62,9 @@ public class GameEngine {
         root.getChildren().removeIf(n -> {
             Sprite s = (Sprite) n;
             if(s.life <= 0) {
-                if(s.type == "enemy"){
+                if(s.type == "player"){
+                    return false;
+                } else if(s.type == "enemy"){
                     addPoints(((Enemy)s).points);
                 }
                 return true;
