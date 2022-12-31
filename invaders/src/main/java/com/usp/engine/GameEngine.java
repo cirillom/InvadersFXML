@@ -10,16 +10,32 @@ import com.usp.graphics.LevelDesigner;
 
 import javafx.scene.layout.Pane;
 
+/**
+ * GameEngine is responsable for running the game, doing movement, collision check and points
+ */
 public class GameEngine {
     int[] alienDir;
+    /**
+     * The highest score achieved by the player without losing
+     */
     public static int high_score_value;
+    /**
+     * Current points in the round
+     */
     public int points_value;
 
+    /**
+     * Initializes some values when the game starts
+     */
     public void start(){
         alienDir = new int[] {1,0};
         points_value = 0;
     }
 
+    /**
+     * Adds points and check for new high score
+     * @param value how many points should be added
+     */
     public void addPoints(int value){
         points_value += value;
         if(high_score_value < points_value){
@@ -27,14 +43,17 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Calculates to where the enemies should move and set's the movement direction
+     * @param enemies List with all enemies 
+     */
     public void setEnemyMovement(List<Sprite> enemies){
         for(Sprite e : enemies){
             Enemy alien = (Enemy)e;
             
             int ret[] = alien.tryMove();
             if(ret == null){
-                //gameOver = true;
-                //TODO enemies exited at the end of the screen, do something
+                //enemies exited at the end of the screen, they'll be removed when movement happens
                 break;
             }
             if(ret[0] != alienDir[0] && ret[1] != alienDir[1]){
@@ -49,16 +68,34 @@ public class GameEngine {
         }
     }
 
-    public void enemyShooting(Pane root, List<Sprite> enemies, double t){
+    /**
+     * Makes the enemies shoot
+     * @param root where the shots will be spawned
+     * @param enemies the list of enemies that could shoot
+     */
+    public void enemyShooting(Pane root, List<Sprite> enemies){
         for (Sprite s : enemies) {
-            if (t > 2) {
-                if (Math.random() < 0.01) {
-                    root.getChildren().add(((Enemy) s).shoot());
-                }
+            if (Math.random() < 0.01) {
+                root.getChildren().add(((Enemy) s).shoot());
             }
         }
     }
 
+    /**
+     * Spawns the UFO that gives a lot of points
+     * @param root where the UFO will be spawned
+     */
+    public void UFOAppearance(Pane root){
+        if (Math.random() < 0.05 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
+            int points = 20 * LevelDesigner.phase + (int) (Math.random() * 250);
+            root.getChildren().add(new Mothership(20, 40, 15, "ufo.png", points));
+        }
+    }
+
+    /**
+     * Removes all dead entities and gives the player points from dead enemies
+     * @param root where the entities should be removed from
+     */
     public void cleanPane(Pane root){
         root.getChildren().removeIf(n -> {
             Sprite s = (Sprite) n;
@@ -76,6 +113,10 @@ public class GameEngine {
         });
     }
 
+    /**
+     * Moves all entities and check for collision between than
+     * @param root
+     */
     public void moveAndCheckCollision(Pane root){
         Player player = (Player) root.getChildren().get(0);
         
@@ -118,6 +159,12 @@ public class GameEngine {
         });
     }
 
+    /**
+     * Test if there's collision between @param a and @param b , damages them and spawns an explosion
+     * @param a first sprite (also where the explosion will happen)
+     * @param b second sprite
+     * @param root
+     */
     void testCollision(Sprite a, Sprite b, Pane root){
         if (a.getBoundsInParent().intersects(b.getBoundsInParent())) {
             a.damage();
