@@ -76,7 +76,7 @@ public class GameEngine {
      */
     public void enemyShooting(Pane root, List<Sprite> enemies){
         for (Sprite s : enemies) {
-            if (Math.random() < 0.01) {
+            if (Math.random() < (0.01 * LevelDesigner.phase)) {
                 root.getChildren().add(((Enemy) s).shoot());
             }
         }
