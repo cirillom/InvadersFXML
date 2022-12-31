@@ -9,10 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * This class is the starting point of our game and set's up our application
  */
 public class App extends Application {
-
     private static Scene scene;
 
     @Override
@@ -23,10 +22,23 @@ public class App extends Application {
         stage.show();
     }
 
+    /**
+     * Sets the root of the stage, making possible to change between scenes
+     * 
+     * @param fxml 
+     * @throws IOException
+     */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * Loads an FXML in order to open a scene
+     * 
+     * @param fxml
+     * @return Parent object to be set as root of a scene
+     * @throws IOException
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
