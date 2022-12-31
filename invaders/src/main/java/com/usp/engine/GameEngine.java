@@ -54,6 +54,7 @@ public class GameEngine {
             int ret[] = alien.tryMove();
             if(ret == null){
                 //enemies exited at the end of the screen, they'll be removed when movement happens
+                e.damage();
                 break;
             }
             if(ret[0] != alienDir[0] && ret[1] != alienDir[1]){
