@@ -88,8 +88,8 @@ public class GameController{
         gameEngine.cleanPane(root);
 
         if (t > 2) {
-            if (Math.random() < 1 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
-                int points = 20 * LevelDesigner.phase + (int) (Math.random() * 100);
+            if (Math.random() < 0.05 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
+                int points = 20 * LevelDesigner.phase + (int) (Math.random() * 250);
                 root.getChildren().add(new Mothership(20, 40, 15, "ufo.png", points));
             }
             t = 0;
@@ -107,7 +107,7 @@ public class GameController{
                 break;
             case SPACE:
                 if(!oneKeyPress){
-                    if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 3){
+                    if(LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("playerbullet")).count() < 2){
                         root.getChildren().add(player.shoot());
                     }
                     oneKeyPress = true;
