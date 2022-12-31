@@ -11,7 +11,7 @@ import com.usp.elements.Sprite;
 import javafx.scene.layout.Pane;
 
 /**
- * LevelDesigner is responsable for drawing the game elements life enemies and barriers
+ * LevelDesigner is responsible for drawing the game elements life enemies and barriers
  */
 public class LevelDesigner {
     /**
