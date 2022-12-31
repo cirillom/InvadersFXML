@@ -3,6 +3,7 @@ package com.usp.engine;
 import java.util.List;
 
 import com.usp.elements.Enemy;
+import com.usp.elements.Mothership;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
 import com.usp.graphics.LevelDesigner;
@@ -66,6 +67,8 @@ public class GameEngine {
                     return false;
                 } else if(s.type == "enemy"){
                     addPoints(((Enemy)s).points);
+                } else if(s.type == "mothership"){
+                    addPoints(((Mothership)s).points);
                 }
                 return true;
             }
@@ -91,6 +94,10 @@ public class GameEngine {
                 case "playerbullet":
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemy")).forEach(enemy -> {
                         testCollision(enemy, s, root);
+                    });
+
+                    LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("mothership")).forEach(mothership -> {
+                        testCollision(mothership, s, root);
                     });
                     
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("enemybullet")).forEach(bullet -> {

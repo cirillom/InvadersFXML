@@ -10,7 +10,7 @@ import javafx.scene.image.ImageView;
 
 public class Sprite extends ImageView {
     public int life = 1;
-    public final String type;
+    public String type;
     int xDir, yDir;
     double speed = 1;
 

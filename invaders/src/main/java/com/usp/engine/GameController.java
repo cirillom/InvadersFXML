@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.usp.App;
+import com.usp.elements.Mothership;
 import com.usp.elements.Player;
 import com.usp.elements.Sprite;
 import com.usp.graphics.LevelDesigner;
@@ -87,6 +88,10 @@ public class GameController{
         gameEngine.cleanPane(root);
 
         if (t > 2) {
+            if (Math.random() < 1 && LevelDesigner.sprites(root).stream().filter(s -> s.type.equals("mothership")).count() < 1) {
+                int points = 20 * LevelDesigner.phase + (int) (Math.random() * 100);
+                root.getChildren().add(new Mothership(20, 40, 15, "ufo.png", points));
+            }
             t = 0;
         }
     }
