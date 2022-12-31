@@ -32,7 +32,6 @@ public class Sprite extends ImageView {
     public void setDir(int x, int y){
         xDir = x;
         yDir = y;
-        //if(type.equals("enemy")) System.out.println("Alien sprite dir: (" + xDir + ", " + yDir + ")");
     }
     
     public void move(){

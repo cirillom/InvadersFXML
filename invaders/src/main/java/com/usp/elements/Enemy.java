@@ -21,7 +21,6 @@ public class Enemy extends Sprite{
         double yPos = getTranslateY();
 
         double newXPos = xPos + xDir;
-        //System.out.println("New Alien pos: " + newXPos + "|" + yPos);
         if(0 >= newXPos || newXPos >= (560 - getImage().getWidth())){
             int dir[] = {0,40};
             return dir;

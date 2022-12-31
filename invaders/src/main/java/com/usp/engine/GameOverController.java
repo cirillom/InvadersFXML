@@ -11,7 +11,6 @@ public class GameOverController {
 
     @FXML
     void startGame(ActionEvent event) throws IOException{
-        System.out.println("Start game");
         App.setRoot("game");
     }
 }

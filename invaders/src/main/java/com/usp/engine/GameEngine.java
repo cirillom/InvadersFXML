@@ -84,7 +84,7 @@ public class GameEngine {
 
             switch (s.type) {
                 case "enemybullet":
-                    testCollision(player, s, root);
+                    testCollision(s, player, root);
 
                     LevelDesigner.sprites(root).stream().filter(e -> e.type.equals("barrier")).forEach(barrier -> {
                         testCollision(barrier, s, root);
